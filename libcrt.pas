@@ -14,7 +14,9 @@ procedure kvm_fg(i:byte); stdcall;
 function kvm_keypressed:byte; stdcall;
   begin result := ord(crt.keypressed)
   end;
-
+procedure kvm_emit(c:char);     stdcall; begin write(c) end;
+procedure kvm_write(s:pchar);   stdcall; begin write(s) end;
+procedure kvm_writeln(s:pchar); stdcall; begin writeln(s) end;
 procedure kvm_bg(i:byte);       stdcall; begin textbackground(i) end;
 procedure kvm_sound(hz:word);   stdcall; begin crt.sound(hz) end;
 procedure kvm_nosound;          stdcall; begin crt.nosound end;
@@ -32,6 +34,7 @@ function kvm_xmax:word;    stdcall; begin result := crt.windmaxx end;
 function kvm_ymax:word;    stdcall; begin result := crt.windmaxy end;
 
 exports
+  kvm_emit, kvm_write, kvm_writeln,
   kvm_readln, kvm_fg, kvm_bg, kvm_keypressed,
   kvm_sound,  kvm_nosound, kvm_cursoron, kvm_cursoroff,
   kvm_clrscr, kvm_clreol, kvm_insline, kvm_delline, kvm_gotoxy,
